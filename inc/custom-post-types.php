@@ -1,5 +1,5 @@
 <?php 
-// Registra Custom Post Type
+// Registra Custom Post Type Versioni
 function version_cpt() {
 
 	$labels = array(
