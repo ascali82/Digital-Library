@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 ?>
@@ -23,7 +23,7 @@
                     <?php endif; ?>
                 </header><!-- .entry-header -->
 
-                <?php _incubation_post_thumbnail(); ?>
+                <?php _digital_library_post_thumbnail(); ?>
 
                 <div class="entry-summary">
                     <?php the_excerpt(); ?>

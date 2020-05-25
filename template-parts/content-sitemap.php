@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package _incubation
+ * @package _digital_library
  */
 ?>
                                     <h2 id="pages">Pagine</h2>

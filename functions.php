@@ -1,27 +1,27 @@
 <?php
 /**
- * _incubation funzioni e definizioni
+ * _digital_library funzioni e definizioni
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package _incubation
+ * @package _digital_library
  */
 
-if ( ! defined( '_INCUBATION_VERSION' ) ) {
+if ( ! defined( '_digital_library_VERSION' ) ) {
 	// Sostituisce il numero versione di questo tema a ogni rilascio
-	define( '_INCUBATION_VERSION', '1.0.0' );
+	define( '_digital_library_VERSION', '1.0.0' );
 }
 
-if ( ! function_exists( '_incubation_setup' ) ) :
+if ( ! function_exists( '_digital_library_setup' ) ) :
     /**
     * Imposta i valori di default del tema e registra il supporto per diverse funzionalità di WordPress
     *
-    *  @since _incubation 1.0
+    *  @since _digital_library 1.0
     */
-    function _incubation_setup() {
+    function _digital_library_setup() {
 
 		// Rende il tema disponbile per la traduzione. Le traduzioni possono essere inserite nella cartella /languages/.
-        load_theme_textdomain( '_incubation', get_template_directory() . '/languages' );        
+        load_theme_textdomain( '_digital_library', get_template_directory() . '/languages' );        
         
         // Aggiunge il feed RSS per i post standard e i commenti a <head>.
         add_theme_support( 'automatic-feed-links' );    
@@ -34,9 +34,9 @@ if ( ! function_exists( '_incubation_setup' ) ) :
         
         // Abilita il supporto per tre menù di navigazione.
         register_nav_menus( array(
-            'primary'   => esc_html__( 'Menu Principale', '_incubation' ),
-            'secondary' => esc_html__( 'Menu Secondario', '_incubation' ),
-            'tertiary' => esc_html__( 'Menu Terziario', '_incubation' )
+            'primary'   => esc_html__( 'Menu Principale', '_digital_library' ),
+            'secondary' => esc_html__( 'Menu Secondario', '_digital_library' ),
+            'tertiary' => esc_html__( 'Menu Terziario', '_digital_library' )
         ) );        
 
         // Abilita il supporto per i Post Formats. Questo aiuta a formattare i post in base al loro contenuto.
@@ -46,7 +46,7 @@ if ( ! function_exists( '_incubation_setup' ) ) :
         add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', ) );
 
         // Abilita la funzionalità di WordPress del custom background.
-        add_theme_support( 'custom-background', apply_filters( '_incubation_custom_background_args', array( 'default-color' => 'ffffff', 'default-image' => '', ) ) );   
+        add_theme_support( 'custom-background', apply_filters( '_digital_library_custom_background_args', array( 'default-color' => 'ffffff', 'default-image' => '', ) ) );   
         
         // Abilita la gestione della Selective Refresh dei widgets all'interno del Customizer. @link https://make.wordpress.org/core/2016/03/22/implementing-selective-refresh-support-for-widgets/
         add_theme_support( 'customize-selective-refresh-widgets' );
@@ -56,27 +56,27 @@ if ( ! function_exists( '_incubation_setup' ) ) :
 
     }
     endif;
-    add_action( 'after_setup_theme', '_incubation_setup' );
+    add_action( 'after_setup_theme', '_digital_library_setup' );
 
     
     // Imposta la larghezza del contenuto in pixel in base allo stile del tema e ai fogli di stile. Priorità 0 per renderla disponibile a callbacks di priorità inferiore.
     // @global int $content_width
-    function _incubation_content_width() {
+    function _digital_library_content_width() {
         // Questa variabile è sovrascrivibile dai temi.
         // Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
         // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-        $GLOBALS['content_width'] = apply_filters( '_incubation_content_width', 640 );
+        $GLOBALS['content_width'] = apply_filters( '_digital_library_content_width', 640 );
     }
-    add_action( 'after_setup_theme', '_incubation_content_width', 0 );
+    add_action( 'after_setup_theme', '_digital_library_content_width', 0 );
 
 
     // Registra le aree widget del tema. @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
-    function _incubation_widgets_init() {
+    function _digital_library_widgets_init() {
         register_sidebar(
             array(
-                'name'          => esc_html__( 'Sidebar', '_incubation' ),
+                'name'          => esc_html__( 'Sidebar', '_digital_library' ),
                 'id'            => 'sidebar-1',
-                'description'   => esc_html__( 'Aggiungi qui i widget.', '_incubation' ),
+                'description'   => esc_html__( 'Aggiungi qui i widget.', '_digital_library' ),
                 'before_widget' => '<section id="%1$s" class="widget %2$s">',
                 'after_widget'  => '</section>',
                 'before_title'  => '<h2 class="widget-title">',
@@ -84,33 +84,33 @@ if ( ! function_exists( '_incubation_setup' ) ) :
             )
         );
     }
-    add_action( 'widgets_init', '_incubation_widgets_init' );
+    add_action( 'widgets_init', '_digital_library_widgets_init' );
 
     // Registra gli stili del tema
-    function _incubation_enqueue_styles() {
-        wp_enqueue_style( '_incubation-style', get_stylesheet_uri(), array(), _INCUBATION_VERSION );
+    function _digital_library_enqueue_styles() {
+        wp_enqueue_style( '_digital_library-style', get_stylesheet_uri(), array(), _digital_library_VERSION );
         // Bootstrap CSS
         wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
     }
-    add_action( 'wp_enqueue_scripts', '_incubation_enqueue_styles');
+    add_action( 'wp_enqueue_scripts', '_digital_library_enqueue_styles');
 
     // Registra gli script del tema
-    function _incubation_enqueue_scripts() {
+    function _digital_library_enqueue_scripts() {
         wp_enqueue_script( 'jquery','https://code.jquery.com/jquery-3.4.1.slim.min.js');
 
         wp_enqueue_script( 'popper','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js');
 
         wp_enqueue_script( 'bootstrapjs','https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js');
 
-        wp_enqueue_script( '_incubation-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _INCUBATION_VERSION, true );
+        wp_enqueue_script( '_digital_library-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _digital_library_VERSION, true );
 
-        wp_enqueue_script( '_incubation-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), _INCUBATION_VERSION, true );
+        wp_enqueue_script( '_digital_library-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), _digital_library_VERSION, true );
     
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );
         }
     }
-    add_action( 'wp_enqueue_scripts', '_incubation_enqueue_scripts');
+    add_action( 'wp_enqueue_scripts', '_digital_library_enqueue_scripts');
 
 
     // Aggiunge classe sr-only a post-navigation
@@ -146,6 +146,9 @@ if ( ! function_exists( '_incubation_setup' ) ) :
 
     // Include le breadcrumbs
     require_once get_template_directory() . '/inc/wp-bootstrap-breadcrumbs.php';
+
+    // Abilita i CPT
+    require_once get_template_directory() . '/inc/custom-post-types.php';
 
     // Include OpenGraph per i single post
     function opengraph_for_posts() {     

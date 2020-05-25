@@ -4,13 +4,13 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 get_header();
 ?>
 
-        <main id="primary" class="site-main">
+        <main id="primary" class="site-main col-12 col-md-8"> 
         <?php 
         if (function_exists('the_breadcrumb')) {
             the_breadcrumb();
@@ -23,7 +23,7 @@ get_header();
                     <small class="text-muted">
                     <?php
                         /* translators: %s: search query. */
-                        printf( esc_html__( 'Risultati di ricerca per: %s', '_incubation' ), '<span class="search-terms onft-italic">' . get_search_query() . '</span>' );
+                        printf( esc_html__( 'Risultati di ricerca per: %s', '_digital_library' ), '<span class="search-terms onft-italic">' . get_search_query() . '</span>' );
                         /* Search Count */ $allsearch = new WP_Query("s=$s&showposts=-1"); $key = wp_specialchars($s, 1); echo '<span class="count lead">'; $count = $allsearch->post_count; _e(''); _e(' &#40;'); echo $count . ' '; if ($count != 1) { _e('articoli');} else _e('articolo'); _e('&#41;'); echo '</span>'; wp_reset_query();
                     ?>
                     </small>

@@ -5,7 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 /*
@@ -26,17 +26,17 @@ if ( post_password_required() ) {
                         ?>
                         <h2 class="comments-title">
                             <?php
-                            $_incubation_comment_count = get_comments_number();
-                            if ( '1' === $_incubation_comment_count ) {
+                            $_digital_library_comment_count = get_comments_number();
+                            if ( '1' === $_digital_library_comment_count ) {
                                 printf(
                                     /* translators: 1: title. */
-                                    esc_html__( 'One thought on &ldquo;%1$s&rdquo;', '_incubation' ),
+                                    esc_html__( 'One thought on &ldquo;%1$s&rdquo;', '_digital_library' ),
                                     '<span>' . wp_kses_post( get_the_title() ) . '</span>'
                                 );
                             } else {
                                 printf( 
                                     /* translators: 1: comment count number, 2: title. */
-                                    esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $_incubation_comment_count, 'comments title', '_incubation' ) ),
+                                    esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $_digital_library_comment_count, 'comments title', '_digital_library' ) ),
                                     number_format_i18n( $_s_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                     '<span>' . wp_kses_post( get_the_title() ) . '</span>'
                                 );
@@ -63,7 +63,7 @@ if ( post_password_required() ) {
                         // If comments are closed and there are comments, let's leave a little note, shall we?
                         if ( ! comments_open() ) :
                             ?>
-                            <p class="no-comments"><?php esc_html_e( 'Comments are closed.', '_incubation' ); ?></p>
+                            <p class="no-comments"><?php esc_html_e( 'Comments are closed.', '_digital_library' ); ?></p>
                             <?php
                         endif;
 

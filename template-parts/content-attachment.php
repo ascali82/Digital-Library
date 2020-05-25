@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 ?>
@@ -23,7 +23,7 @@
                     <?php endif; ?>
                 </header><!-- .entry-header -->
 
-                <?php _incubation_post_thumbnail(); ?>
+                <?php _digital_library_post_thumbnail(); ?>
 
                 <div class="entry-attachment">
                     <?php $image_size = apply_filters( 'wporg_attachment_size', 'large' ); 
@@ -38,6 +38,6 @@
                 </div><!-- .entry-attachment -->
 
                 <footer class="entry-footer">
-                    <?php // _incubation_entry_footer(); ?>
+                    <?php // _digital_library_entry_footer(); ?>
                 </footer><!-- .entry-footer -->
             </article><!-- #post-<?php the_ID(); ?> -->

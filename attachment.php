@@ -4,13 +4,13 @@
  *
  * @link https://developer.wordpress.org/themes/template-files-section/attachment-template-files/
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main col-12 col-md-8"> 
 	<?php 
         if (function_exists('the_breadcrumb')) {
             the_breadcrumb();
@@ -24,8 +24,8 @@ get_header();
 
 			the_post_navigation(
 				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', '_incubation' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', '_incubation' ) . '</span> <span class="nav-title">%title</span>',
+					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', '_digital_library' ) . '</span> <span class="nav-title">%title</span>',
+					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', '_digital_library' ) . '</span> <span class="nav-title">%title</span>',
 				)
 			);
 

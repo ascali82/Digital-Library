@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 ?>
@@ -25,7 +25,7 @@
     <body <?php body_class(); ?> itemscope="" itemtype="http://schema.org/WebPage">
     <?php wp_body_open(); ?>
     <div id="page" class="site container">
-        <a class="skip-link screen-reader-text sr-only sr-only-focusable" href="#primary"><?php esc_html_e( 'Passa al contenuto', '_incubation' ); ?></a>
+        <a class="skip-link screen-reader-text sr-only sr-only-focusable" href="#primary"><?php esc_html_e( 'Passa al contenuto', '_digital_library' ); ?></a>
 
         <header id="masthead" class="site-header">
 
@@ -41,10 +41,10 @@
                     <p class="site-title h1" itemprop="name"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
                     <?php
                 endif;
-                $_incubation_description = get_bloginfo( 'description', 'display' );
-                if ( $_incubation_description || is_customize_preview() ) :
+                $_digital_library_description = get_bloginfo( 'description', 'display' );
+                if ( $_digital_library_description || is_customize_preview() ) :
                     ?>
-                    <p class="site-description" itemprop="description"><?php echo $_incubation_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+                    <p class="site-description" itemprop="description"><?php echo $_digital_library_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
                 <?php endif; ?>
             </div><!-- .site-branding -->
 
@@ -53,7 +53,7 @@
                     <!-- Brand and toggle get grouped for better mobile display -->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#primary-menu" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle navigation">
 					        <span class="navbar-toggler-icon"></span>
-					    <?php esc_html_e( 'Menu', '_incubation' ); ?>
+					    <?php esc_html_e( 'Menu', '_digital_library' ); ?>
 				        </button>
                         
                         <?php

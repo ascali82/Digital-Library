@@ -4,13 +4,13 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 get_header();
 ?>
 
-        <main id="primary" class="site-main">
+        <main id="primary" class="site-main col-12 col-md-8"> 
         <?php 
         if (function_exists('the_breadcrumb')) {
             the_breadcrumb();

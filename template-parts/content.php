@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package _incubation
+ * @package _digital_library
  */
 
 ?>
@@ -22,14 +22,14 @@
                         ?>
                         <div class="entry-meta">
                             <?php
-                            _incubation_posted_on();
-                            _incubation_posted_by();
+                            _digital_library_posted_on();
+                            _digital_library_posted_by();
                             ?>
                         </div><!-- .entry-meta -->
                     <?php endif; ?>
                 </header><!-- .entry-header -->
 
-                <?php _incubation_post_thumbnail(); ?>
+                <?php _digital_library_post_thumbnail(); ?>
 
                 <div class="entry-content">
                     <?php
@@ -37,7 +37,7 @@
                         sprintf(
                             wp_kses(
                                 /* translators: %s: Name of current post. Only visible to screen readers */
-                                __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', '_incubation' ),
+                                __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', '_digital_library' ),
                                 array(
                                     'span' => array(
                                         'class' => array(),
@@ -50,7 +50,7 @@
 
                     wp_link_pages(
                         array(
-                            'before' => '<div class="page-links">' . esc_html__( 'Pages:', '_incubation' ),
+                            'before' => '<div class="page-links">' . esc_html__( 'Pages:', '_digital_library' ),
                             'after'  => '</div>',
                         )
                     );
@@ -58,6 +58,6 @@
                 </div><!-- .entry-content -->
 
                 <footer class="entry-footer">
-                    <?php  _incubation_entry_footer(); ?>
+                    <?php  _digital_library_entry_footer(); ?>
                 </footer><!-- .entry-footer -->
             </article><!-- #post-<?php the_ID(); ?> -->
