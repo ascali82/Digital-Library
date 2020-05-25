@@ -150,6 +150,12 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
     // Abilita i CPT
     require_once get_template_directory() . '/inc/custom-post-types.php';
 
+    // Registra la classe TGM-Plugin-Activation
+    require_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
+    require_once get_template_directory() . '/inc/plugin-call.php';
+    
+
+
     // Include OpenGraph per i single post
     function opengraph_for_posts() {     
         if ( is_singular() ) {
