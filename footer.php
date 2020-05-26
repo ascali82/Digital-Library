@@ -12,22 +12,17 @@
 ?>
         </div><!-- #wrapper -->
         </div><!-- #page -->
-        <footer id="colophon" class="site-footer footer mt-auto">
-        <div class="site-info text-center bg-light text-muted">
-        <div class="container">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', '_s' ) ); ?>">
+        <footer id="colophon" class="site-footer footer mt-auto bg-light py-3">
+		<div class="container">
+        <div class="site-info text-center text-muted">
+
 				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', '_s' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
+				$my_theme = wp_get_theme();
 				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', '_s' ), '_s', '<a href="https://automattic.com/">Automattic</a>' );
+				printf( esc_html__( '%1$s &copy; %2$s.', '_digital_library' ), '<a href="' . esc_html( $my_theme->get( 'ThemeURI' ) ). '">' . esc_html( $my_theme->get( 'Name' ) ). '</a>', '<a href="' . esc_html( $my_theme->get( 'AuthorURI' ) ). '">' . esc_html( $my_theme->get( 'Author' ) ). '</a>' );
 				?>
+			</div><!-- .site-info -->
             </div>
-            </div><!-- .site-info -->
         </footer><!-- #colophon -->
 
 <?php wp_footer(); ?>
