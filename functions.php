@@ -89,6 +89,8 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
     // Registra gli stili del tema
     function _digital_library_enqueue_styles() {
         wp_enqueue_style( '_digital_library-style', get_stylesheet_uri(), array(), _digital_library_VERSION );
+        // CORE CSS
+        wp_enqueue_style( 'main', get_stylesheet_uri() . '/assets/css/main.css');        
         // Bootstrap CSS
         wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
     }

@@ -57,3 +57,165 @@ function version_cpt() {
 
 }
 add_action( 'init', 'version_cpt', 0 );
+
+// Register Custom Post Type
+function autori_cpt() {
+
+	$labels = array(
+		'name'                  => _x( 'Autori', 'Post Type General Name', '_digital_library' ),
+		'singular_name'         => _x( 'Autore', 'Post Type Singular Name', '_digital_library' ),
+		'menu_name'             => __( 'Autori', '_digital_library' ),
+		'name_admin_bar'        => __( 'Autore', '_digital_library' ),
+		'archives'              => __( 'Item Archives', '_digital_library' ),
+		'attributes'            => __( 'Item Attributes', '_digital_library' ),
+		'parent_item_colon'     => __( 'Parent Item:', '_digital_library' ),
+		'all_items'             => __( 'All Items', '_digital_library' ),
+		'add_new_item'          => __( 'Add New Item', '_digital_library' ),
+		'add_new'               => __( 'Add New', '_digital_library' ),
+		'new_item'              => __( 'New Item', '_digital_library' ),
+		'edit_item'             => __( 'Edit Item', '_digital_library' ),
+		'update_item'           => __( 'Update Item', '_digital_library' ),
+		'view_item'             => __( 'View Item', '_digital_library' ),
+		'view_items'            => __( 'View Items', '_digital_library' ),
+		'search_items'          => __( 'Search Item', '_digital_library' ),
+		'not_found'             => __( 'Not found', '_digital_library' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', '_digital_library' ),
+		'featured_image'        => __( 'Featured Image', '_digital_library' ),
+		'set_featured_image'    => __( 'Set featured image', '_digital_library' ),
+		'remove_featured_image' => __( 'Remove featured image', '_digital_library' ),
+		'use_featured_image'    => __( 'Use as featured image', '_digital_library' ),
+		'insert_into_item'      => __( 'Insert into item', '_digital_library' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', '_digital_library' ),
+		'items_list'            => __( 'Items list', '_digital_library' ),
+		'items_list_navigation' => __( 'Items list navigation', '_digital_library' ),
+		'filter_items_list'     => __( 'Filter items list', '_digital_library' ),
+	);
+	$args = array(
+		'label'                 => __( 'Autore', '_digital_library' ),
+		'description'           => __( 'Post Type Description', '_digital_library' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor' ),
+		'taxonomies'            => array( 'category', 'post_tag' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'menu_icon'             => 'dashicons-groups',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+		'show_in_rest'          => true,
+	);
+	register_post_type( 'autori', $args );
+
+}
+add_action( 'init', 'autori_cpt', 0 );
+
+// Register Custom Post Type
+function opere_cpt() {
+
+	$labels = array(
+		'name'                  => _x( 'Opere', 'Post Type General Name', '_digital_library' ),
+		'singular_name'         => _x( 'Opera', 'Post Type Singular Name', '_digital_library' ),
+		'menu_name'             => __( 'Opere', '_digital_library' ),
+		'name_admin_bar'        => __( 'Opere', '_digital_library' ),
+		'archives'              => __( 'Item Archives', '_digital_library' ),
+		'attributes'            => __( 'Item Attributes', '_digital_library' ),
+		'parent_item_colon'     => __( 'Parent Item:', '_digital_library' ),
+		'all_items'             => __( 'All Items', '_digital_library' ),
+		'add_new_item'          => __( 'Add New Item', '_digital_library' ),
+		'add_new'               => __( 'Add New', '_digital_library' ),
+		'new_item'              => __( 'New Item', '_digital_library' ),
+		'edit_item'             => __( 'Edit Item', '_digital_library' ),
+		'update_item'           => __( 'Update Item', '_digital_library' ),
+		'view_item'             => __( 'View Item', '_digital_library' ),
+		'view_items'            => __( 'View Items', '_digital_library' ),
+		'search_items'          => __( 'Search Item', '_digital_library' ),
+		'not_found'             => __( 'Not found', '_digital_library' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', '_digital_library' ),
+		'featured_image'        => __( 'Featured Image', '_digital_library' ),
+		'set_featured_image'    => __( 'Set featured image', '_digital_library' ),
+		'remove_featured_image' => __( 'Remove featured image', '_digital_library' ),
+		'use_featured_image'    => __( 'Use as featured image', '_digital_library' ),
+		'insert_into_item'      => __( 'Insert into item', '_digital_library' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', '_digital_library' ),
+		'items_list'            => __( 'Items list', '_digital_library' ),
+		'items_list_navigation' => __( 'Items list navigation', '_digital_library' ),
+		'filter_items_list'     => __( 'Filter items list', '_digital_library' ),
+	);
+	$args = array(
+		'label'                 => __( 'Opera', '_digital_library' ),
+		'description'           => __( 'Post Type Description', '_digital_library' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor' ),
+		'taxonomies'            => array( 'category', 'post_tag' ),
+		'hierarchical'          => true,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'menu_icon'             => 'dashicons-book-alt',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+		'show_in_rest'          => true,
+	);
+	register_post_type( 'opere', $args );
+
+}
+add_action( 'init', 'opere_cpt', 0 );
+
+// Register Custom Taxonomy
+function letterature_tax() {
+
+	$labels = array(
+		'name'                       => _x( 'Letterature', 'Taxonomy General Name', '_digital_library' ),
+		'singular_name'              => _x( 'Letteratura', 'Taxonomy Singular Name', '_digital_library' ),
+		'menu_name'                  => __( 'Letterature', '_digital_library' ),
+		'all_items'                  => __( 'All Items', '_digital_library' ),
+		'parent_item'                => __( 'Parent Item', '_digital_library' ),
+		'parent_item_colon'          => __( 'Parent Item:', '_digital_library' ),
+		'new_item_name'              => __( 'New Item Name', '_digital_library' ),
+		'add_new_item'               => __( 'Add New Item', '_digital_library' ),
+		'edit_item'                  => __( 'Edit Item', '_digital_library' ),
+		'update_item'                => __( 'Update Item', '_digital_library' ),
+		'view_item'                  => __( 'View Item', '_digital_library' ),
+		'separate_items_with_commas' => __( 'Separate items with commas', '_digital_library' ),
+		'add_or_remove_items'        => __( 'Add or remove items', '_digital_library' ),
+		'choose_from_most_used'      => __( 'Choose from the most used', '_digital_library' ),
+		'popular_items'              => __( 'Popular Items', '_digital_library' ),
+		'search_items'               => __( 'Search Items', '_digital_library' ),
+		'not_found'                  => __( 'Not Found', '_digital_library' ),
+		'no_terms'                   => __( 'No items', '_digital_library' ),
+		'items_list'                 => __( 'Items list', '_digital_library' ),
+		'items_list_navigation'      => __( 'Items list navigation', '_digital_library' ),
+	);
+	$rewrite = array(
+		'slug'                       => '',
+		'with_front'                 => true,
+		'hierarchical'               => true,
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => true,
+		'rewrite'                    => $rewrite,
+		'show_in_rest'               => true,
+	);
+	register_taxonomy( 'letterature', array( 'post' ), $args );
+
+}
+add_action( 'init', 'letterature_tax', 0 );
