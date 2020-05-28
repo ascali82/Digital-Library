@@ -12,7 +12,7 @@
 ?>
         </div><!-- #wrapper -->
         </div><!-- #page -->
-        <footer id="colophon" class="site-footer footer mt-auto bg-light py-3">
+        <footer id="colophon" class="site-footer footer">
 		<div class="container">
         <div class="site-info text-center text-muted">
 
