@@ -97,8 +97,11 @@ if ( !is_front_page() ) {
     // GESTISCE LA PAGINA RISULTATI DI RICERCA
     elseif (is_search()) { //FUNZIONA
         echo"<li class='breadcrumb-item'>";printf( esc_html__( 'Risultati di ricerca per: %s', '_digital_library' ), '<span>' . get_search_query() . '</span>' ); echo'</li>';
-    } elseif ( is_single() && !is_custom_post_type( 'version' ) ) {
+    } if ( is_singular( 'version' ) ) {
+//    elseif ( is_single() && !is_custom_post_type( 'version' ) ) {
         echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/versioni">Versioni</a></li><li class="breadcrumb-item active">';the_title();'</li>';
+    }elseif ( is_singular( 'autori' ) )  {
+        echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/autori">Autori</a></li><li class="breadcrumb-item active">';the_title();'</li>';
     }// MANCANO CPT E TAX
 }
 

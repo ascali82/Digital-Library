@@ -93,16 +93,23 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
         wp_enqueue_style( 'main', get_stylesheet_uri() . '/assets/css/main.css');        
         // Bootstrap CSS
         wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+        // FA
+        wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+        // Bootstrap CSS
+        wp_enqueue_style('bootstrap_table', 'https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css');
     }
     add_action( 'wp_enqueue_scripts', '_digital_library_enqueue_styles');
 
     // Registra gli script del tema
     function _digital_library_enqueue_scripts() {
-        wp_enqueue_script( 'jquery','https://code.jquery.com/jquery-3.4.1.slim.min.js');
+        wp_deregister_script('jquery');
+        wp_enqueue_script( 'jquery','https://code.jquery.com/jquery-3.4.1.slim.min.js', array(), '', true );
 
-        wp_enqueue_script( 'popper','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js');
+        wp_enqueue_script( 'popper','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array(), '', true );
 
-        wp_enqueue_script( 'bootstrapjs','https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js');
+        wp_enqueue_script( 'bootstrapjs','https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array(), '', true );
+
+        wp_enqueue_script( 'bootstrap_table_js','https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js', array(), '', true );
 
         wp_enqueue_script( '_digital_library-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _digital_library_VERSION, true );
 
@@ -204,3 +211,8 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
 
         return in_array( $current_post_type, $custom_types );
     }
+
+
+
+        // Include il supporto per la gerarchia dei termini delle tassonomie
+        require_once get_template_directory() . '/inc/class-term-hyerarchical.php';
