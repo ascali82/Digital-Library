@@ -1,6 +1,6 @@
 <?php
 /**
- * Parte di template per la visualizzazione dei post Autori nella pagina archivio
+ * Parte di template per la visualizzazione dei post Opere nella pagina archivio
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *

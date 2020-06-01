@@ -114,7 +114,7 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
         wp_enqueue_script( '_digital_library-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _digital_library_VERSION, true );
 
         wp_enqueue_script( '_digital_library-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), _digital_library_VERSION, true );
-    
+
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );
         }
@@ -216,3 +216,70 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
 
         // Include il supporto per la gerarchia dei termini delle tassonomie
         require_once get_template_directory() . '/inc/class-term-hyerarchical.php';
+
+        // Disabilita Gutenberg nei CPT
+        add_filter('use_block_editor_for_post_type', 'prefix_disable_gutenberg', 10, 2);
+        function prefix_disable_gutenberg($current_status, $post_type)
+        {
+            // Use your post type key instead of 'product'
+            if ($post_type === 'autori') return false;
+            return $current_status;
+        }
+
+        // Auto fill Title and Slug for 'autori' CPT
+        add_action('admin_head', 'hide_wp_title_input');
+        function hide_wp_title_input() {
+          $screen = get_current_screen();
+          if ($screen->id != 'autori') {
+            return;
+          }
+          ?>
+            <style type="text/css">
+              #post-body-content {
+                display: none;
+              }
+            </style>
+          <?php 
+        }
+
+
+        function save_post_type_post($post_id) {
+          $post_type = get_post_type($post_id);
+          if ($post_type != 'autori') {
+            return;
+          }
+          if( has_term( 'letteratura-latina', 'letterature' ) ) {
+
+            $praenomen = get_field( 'givenname', $post_id );
+            $nomen = get_field( 'familyname', $post_id );
+            $cognomen = get_field( 'additionalname', $post_id );
+            $supernomina = get_field( 'alternatename', $post_id );
+
+            $post_title = $praenomen .' '. $nomen .' '. $cognomen .' '. $supernomina;
+            $post_name = sanitize_title($post_title);
+            $post = array(
+              'ID' => $post_id,
+              'post_name' => $post_name,
+              'post_title' => $post_title
+            );
+            wp_update_post($post);
+          } 
+          elseif ( has_term( 'letteratura-italiana', 'letterature' ) ) {
+
+            $nome = get_field( 'givenname', $post_id );
+            $secondonome = get_field( 'additionalname', $post_id );
+            $cognome = get_field( 'familyname', $post_id );
+            $alias = get_field( 'alternatename', $post_id );
+
+            $post_title = $nome .' '. $secondonome .' '. $cognome;
+            $post_name = sanitize_title($post_title);
+            $post = array(
+              'ID' => $post_id,
+              'post_name' => $post_name,
+              'post_title' => $post_title
+            );
+            wp_update_post($post);
+          } 
+
+        }
+        add_action('acf/save_post', 'save_post_type_post', 20); // fires after ACF
