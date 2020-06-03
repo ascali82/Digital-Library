@@ -189,6 +189,7 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
     
     add_action( 'wp_head', 'opengraph_for_posts' );
 
+    // Controllo aggiuntivo identificativo CPT
     /**
      * Check if a post is a custom post type.
      * @param  mixed $post Post object or ID
@@ -217,20 +218,20 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
         // Include il supporto per la gerarchia dei termini delle tassonomie
         require_once get_template_directory() . '/inc/class-term-hyerarchical.php';
 
-        // Disabilita Gutenberg nei CPT
+        // Disabilita Gutenberg nei CPT autori e opere
         add_filter('use_block_editor_for_post_type', 'prefix_disable_gutenberg', 10, 2);
         function prefix_disable_gutenberg($current_status, $post_type)
         {
-            // Use your post type key instead of 'product'
-            if ($post_type === 'autori') return false;
+            // Indicazione Post Type
+            if ($post_type === 'autori' || 'opere') return false;
             return $current_status;
         }
 
-        // Auto fill Title and Slug for 'autori' CPT
+        // Generazione titolo e slug per il cpt 'autori'
         add_action('admin_head', 'hide_wp_title_input');
         function hide_wp_title_input() {
           $screen = get_current_screen();
-          if ($screen->id != 'autori') {
+          if ($screen->id != 'autori' ) {
             return;
           }
           ?>
@@ -241,7 +242,6 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
             </style>
           <?php 
         }
-
 
         function save_post_type_post($post_id) {
           $post_type = get_post_type($post_id);
@@ -283,3 +283,5 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
 
         }
         add_action('acf/save_post', 'save_post_type_post', 20); // fires after ACF
+
+

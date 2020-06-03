@@ -33,8 +33,8 @@
                 <div class="entry-content">
                 <?php  // echo get_the_term_list( $post->ID, 'letterature', '<ul class="styles"><li>', ',</li><li>', '</li></ul>' );
                             ?>
-                        <?php if( get_field('description') ): ?>
-                            <p class="lead"><span itemprop="description"><?php the_field('description'); ?></span></p>
+                        <?php if( get_field('disambiguatingDescription') ): ?>
+                            <p class="lead"><span itemprop="disambiguatingDescription"><?php the_field('disambiguatingDescription'); ?></span></p>
                         <?php endif; ?>
                         <?php 
                         $image = get_field('image');
@@ -69,26 +69,50 @@
                             <?php endif; ?>
                         <?php endif; ?>
                         <dl class="row">
-                            <?php if( get_field('givenname') ): ?>
-                                <dt class="col col-lg-4">Nome</dt>
-                                <dd class="col col-lg-4"><span itemprop="givenName"><?php the_field('givenname'); ?></span></dd>
-                                <div class="w-100"></div>
-                            <?php endif; ?>
-                            <?php if( get_field('additionalname') ): ?>
-                                <dt class="col col-lg-4">Secondo Nome</dt>
-                                <dd class="col col-lg-4"><span itemprop="additionalName"><?php the_field('additionalname'); ?></span></dd>
-                                <div class="w-100"></div>
-                            <?php endif; ?>
-                            <?php if( get_field('familyname') ): ?>
-                                <dt class="col col-lg-4">Cognome</dt>
-                                <dd class="col col-lg-4"><span itemprop="familyName"><?php the_field('familyname'); ?></span></dd>
-                                <div class="w-100"></div>
-                            <?php endif; ?>
-                            <?php if( get_field('alternatename') ): ?>
-                                <dt class="col col-lg-4">Alias</dt>
-                                <dd class="col col-lg-4"><span itemprop="alternateName"><?php the_field('alternatename'); ?></span></dd>
-                                <div class="w-100"></div>
-                            <?php endif; ?>    
+                            <?php if ( has_term( 'letteratura-italiana', 'letterature' ) ) { ?>
+                                <?php if( get_field('givenname') ): ?>
+                                    <dt class="col col-lg-4">Nome</dt>
+                                    <dd class="col col-lg-4"><span itemprop="givenName"><?php the_field('givenname'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>
+                                <?php if( get_field('additionalname') ): ?>
+                                    <dt class="col col-lg-4">Secondo Nome</dt>
+                                    <dd class="col col-lg-4"><span itemprop="additionalName"><?php the_field('additionalname'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>
+                                <?php if( get_field('familyname') ): ?>
+                                    <dt class="col col-lg-4">Cognome</dt>
+                                    <dd class="col col-lg-4"><span itemprop="familyName"><?php the_field('familyname'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>
+                                <?php if( get_field('alternatename') ): ?>
+                                    <dt class="col col-lg-4">Alias</dt>
+                                    <dd class="col col-lg-4"><span itemprop="alternateName"><?php the_field('alternatename'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>
+                            <?php } ?>  
+                            <?php if ( has_term( 'letteratura-latina', 'letterature' ) ) {  ?>  
+                                <?php if( get_field('givenname') ): ?>
+                                    <dt class="col col-lg-4">Praenomen</dt>
+                                    <dd class="col col-lg-4"><span itemprop="givenName"><?php the_field('givenname'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>
+                                <?php if( get_field('familyname') ): ?>
+                                    <dt class="col col-lg-4">Nomen</dt>
+                                    <dd class="col col-lg-4"><span itemprop="familyName"><?php the_field('familyname'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>                                
+                                <?php if( get_field('additionalname') ): ?>
+                                    <dt class="col col-lg-4">Cognomen</dt>
+                                    <dd class="col col-lg-4"><span itemprop="additionalName"><?php the_field('additionalname'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>
+                                <?php if( get_field('alternatename') ): ?>
+                                    <dt class="col col-lg-4">Supernomina</dt>
+                                    <dd class="col col-lg-4"><span itemprop="alternateName"><?php the_field('alternatename'); ?></span></dd>
+                                    <div class="w-100"></div>
+                                <?php endif; ?>                                
+                            <?php } ?>  
                             <?php if( get_field('identifier') ): ?>
                                 <dt class="col col-lg-4">Controllo di autorità</dt>
                                 <dd class="col col-lg-4"><a href="<?php the_field('identifier'); ?>"><link itemprop="identifier" href="<?php the_field('identifier'); ?>" />VIAF</a></dd>

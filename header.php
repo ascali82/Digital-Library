@@ -27,7 +27,7 @@
     <div id="page" class="site container">
         <a class="skip-link screen-reader-text sr-only sr-only-focusable" href="#primary"><?php esc_html_e( 'Passa al contenuto', '_digital_library' ); ?></a>
 
-        <header id="masthead" class="site-header">
+        <header id="masthead" class="site-header row">
 
             <div class="site-branding">
                 <?php

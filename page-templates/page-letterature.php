@@ -1,14 +1,15 @@
 <?php
 /**
- * Template Name: Archivio Autori
+ * Template Name: Archivio Letterature
  * 
- * Template per la visualizzazione della pagina con l'elenco degli autori
+ * Template per la visualizzazione della pagina con l'elenco delle letterature
  *
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package _digital_library
  */
+
 get_header();
 ?>
 
@@ -17,9 +18,7 @@ get_header();
         if (function_exists('the_breadcrumb')) {
             the_breadcrumb();
         }
-         ?>
-
-
+         ?> 
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <header class="entry-header">
                     <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
@@ -28,42 +27,28 @@ get_header();
                 <?php _digital_library_post_thumbnail(); ?>
 
                 <div class="entry-content">        
-                <?php
+            <?php
             the_content();
-  $query = new WP_Query( array( 'post_type' => 'autori', 'posts_per_page' => -1  ) );
- 
-    $posts = $query->posts;
-                   
-echo '<table class="table-sm table-borderless"
-  data-toggle="table"
-  data-search="true"
-  data-show-search-button="true"
-  data-pagination="true">
-    <thead class="thead-light">
-    <tr>
-    <th data-sortable="true" data-field="Autore" data-halign="center" data-align="left">Autore</th>
-    <th data-sortable="true" data-field="Letteratura" data-halign="center" data-align="left">Letteratura</th>
-    <th data-sortable="true" data-field="Periodo" data-halign="center" data-align="left">Periodo</th>
-    </tr>
-  </thead>
-  <tbody>';
+            $terms = get_terms( array( 
+                'taxonomy' => 'letterature',
+                'parent'   => 0
+            ) );
+            if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+                echo '<section>';
+                foreach ( $terms as $term ) {
+                    echo '<div class="card"><div class="card-body"><h2 class="card-title"><a href="' . $term->slug . '">' . $term->name . '</a></h2></div></div>';
+                }
+                echo '</section>';
+            }
+                // If comments are open or we have at least one comment, load up the comment template.
+                if ( comments_open() || get_comments_number() ) :
+                    comments_template();
+                endif;
 
-    foreach ($posts as $post) {
-echo '<tr id="tr-id-'. get_the_ID() .'" class="tr-class-'. get_the_ID() .'" data-title="bootstrap table">';
-echo  the_title( '<td id="td-id-'. get_the_ID() . '" class="td-class-'. get_the_ID() .'" data-title="bootstrap table"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></td>' ); 
-$args = array('orderby' => 'term_order', 'order' => 'ASC', 'fields' => 'all');
-$terms = wp_get_object_terms( $post->ID, 'letterature', $args );
-$walk = new Walker_Quickstart();
-echo $walk->walk($terms, 0);
-echo '</tr>';
-    }
-
-echo '</tbody> </table>';    
-
-
-wp_reset_postdata();
- 
-?>
+//            endwhile; // End of the loop.
+//        endif;
+        wp_reset_postdata();
+            ?>
                 </div><!-- .entry-content -->
 
 <?php if ( get_edit_post_link() ) : ?>

@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Archivio Autori
+ * Template Name: Archivio Opere
  * 
- * Template per la visualizzazione della pagina con l'elenco degli autori
+ * Template per la visualizzazione della pagina con l'elenco delle opere
  *
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
@@ -27,10 +27,11 @@ get_header();
 
                 <?php _digital_library_post_thumbnail(); ?>
 
-                <div class="entry-content">        
+                <div class="entry-content"> 
+ 
                 <?php
             the_content();
-  $query = new WP_Query( array( 'post_type' => 'autori', 'posts_per_page' => -1  ) );
+  $query = new WP_Query( array( 'post_type' => 'opere', 'posts_per_page' => -1  ) );
  
     $posts = $query->posts;
                    
@@ -41,9 +42,9 @@ echo '<table class="table-sm table-borderless"
   data-pagination="true">
     <thead class="thead-light">
     <tr>
-    <th data-sortable="true" data-field="Autore" data-halign="center" data-align="left">Autore</th>
+    <th data-sortable="true" data-field="Opera" data-halign="center" data-align="left">Opera</th>
     <th data-sortable="true" data-field="Letteratura" data-halign="center" data-align="left">Letteratura</th>
-    <th data-sortable="true" data-field="Periodo" data-halign="center" data-align="left">Periodo</th>
+    <th data-sortable="true" data-field="Genere" data-halign="center" data-align="left">Genere</th>
     </tr>
   </thead>
   <tbody>';

@@ -12,14 +12,14 @@
 ?>
         </div><!-- #wrapper -->
         </div><!-- #page -->
-        <footer id="colophon" class="site-footer footer">
+        <footer id="colophon" class="site-footer footer mb-0">
 		<div class="container">
         <div class="site-info text-center text-muted">
 
 				<?php
 				$my_theme = wp_get_theme();
 				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( '%1$s &copy; %2$s.', '_digital_library' ), '<a href="' . esc_html( $my_theme->get( 'ThemeURI' ) ). '">' . esc_html( $my_theme->get( 'Name' ) ). '</a>', '<a href="' . esc_html( $my_theme->get( 'AuthorURI' ) ). '">' . esc_html( $my_theme->get( 'Author' ) ). '</a>' );
+				printf( esc_html__( '%1$s &copy; %2$s', '_digital_library' ), '<a href="' . esc_html( $my_theme->get( 'ThemeURI' ) ). '">' . esc_html( $my_theme->get( 'Name' ) ). ' <i class="fas fa-external-link-alt fa-xs"></i></a>', '<a href="' . esc_html( $my_theme->get( 'AuthorURI' ) ). '">' . esc_html( $my_theme->get( 'Author' ) ). ' <i class="fas fa-external-link-alt fa-xs"></i></a>' );
 				?>
 			</div><!-- .site-info -->
             </div>

@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Archivio Autori
+ * Template Name: Archivio Generi
  * 
- * Template per la visualizzazione della pagina con l'elenco degli autori
+ * Template per la visualizzazione della pagina con l'elenco dei generi letterari
  *
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
@@ -30,7 +30,7 @@ get_header();
                 <div class="entry-content">        
                 <?php
             the_content();
-  $query = new WP_Query( array( 'post_type' => 'autori', 'posts_per_page' => -1  ) );
+  $query = new WP_Query( array( 'post_type' => 'generi', 'posts_per_page' => -1  ) );
  
     $posts = $query->posts;
                    
@@ -41,13 +41,13 @@ echo '<table class="table-sm table-borderless"
   data-pagination="true">
     <thead class="thead-light">
     <tr>
-    <th data-sortable="true" data-field="Autore" data-halign="center" data-align="left">Autore</th>
+    <th data-sortable="true" data-field="Genere" data-halign="center" data-align="left">Autore</th>
+    <th data-sortable="true" data-field="Tipologia" data-halign="center" data-align="left">Tipologia</th>
     <th data-sortable="true" data-field="Letteratura" data-halign="center" data-align="left">Letteratura</th>
-    <th data-sortable="true" data-field="Periodo" data-halign="center" data-align="left">Periodo</th>
     </tr>
   </thead>
   <tbody>';
-
+// impostare loop per parent letteratura e per parent tipogeneri_tax
     foreach ($posts as $post) {
 echo '<tr id="tr-id-'. get_the_ID() .'" class="tr-class-'. get_the_ID() .'" data-title="bootstrap table">';
 echo  the_title( '<td id="td-id-'. get_the_ID() . '" class="td-class-'. get_the_ID() .'" data-title="bootstrap table"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></td>' ); 

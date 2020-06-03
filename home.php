@@ -13,12 +13,15 @@ get_header();
 ?>
 
         <main id="primary" class="site-main col-12 col-md-8"> 
+        <div class="container">
+
         <?php 
         if (function_exists('the_breadcrumb')) {
             the_breadcrumb();
         }
          ?> 
 
+</div>
         <?php
         if ( have_posts() ) :
 

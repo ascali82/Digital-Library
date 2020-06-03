@@ -28,6 +28,7 @@ get_header();
                 </header><!-- .page-header -->
                 </div>
 </div>
+<section id="subterms" class="border border border-dark mb-3">
                 <?php
 
         //get the current object
@@ -71,30 +72,66 @@ get_header();
 
             // try  var_dump($sub_terms);  to see all available data!
 
-            echo '<div class="card-deck">';
+            echo '<div class="card-deck mt-3">';
 
             foreach ($sub_terms as $sub_term) {
                 $image = get_field('immagine', $sub_term);
                 // try  var_dump($sub_term);  to see all available data!
 
                 // only show the name for the example, "ps-thematic#1"
-                echo '  <div class="card">
+                echo '<div class="col-md-4"> <div class="card mb-3">
 
                 <div class="card-body">
                   <a href="'.$sub_term->slug.'"><h2 class="card-title">'.$sub_term->name.'</h2></a>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
-              </div>';
+              </div></div>';
 
             }// END foreach
 
-            echo '</div><!-- END .sub-terms -->';
+            echo '</div><!-- END .sub-terms -->';?>
+</section>
+<section class="border border border-dark mb-3">
+<div id="accordion">
 
-        }// END if
+    <div class="card">
+
+        <div class="card-header" id="headingOne"><h3 class="mb-0"><button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Autori</button></h3></div>
+            <?php       }// END if
                 /* Start the Loop */
-                while ( have_posts() ) :
-                    the_post();
+                $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+                $q = new WP_Query([
+                    'post_type' => 'autori',
+                    'posts_per_page' => get_option('posts_per_page'),
+                     get_query_var( 'taxonomy' ) => get_query_var( 'term' ),
+                    'paged' => $paged
+                ]);
+                $temp_query = $wp_query;
+                $wp_query = null;
+                $wp_query = $q;
+                
+                if ( $q->have_posts() ) :
+                    echo '<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body"><ul class="list-group">';
+                    while ( $q->have_posts() ) : $q->the_post(); ?>
+                
+                <li class="list-group-item list-group-item-action"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+
+                
+                        <?php    endwhile;
+                    echo '</ul></div></div>
+                    </div>';
+
+                endif;
+
+//                echo '</div>';
+                // Reset postdata
+                wp_reset_postdata();
+                
+                // pagination goes here..
+                
+                // Reset main query object
+                $wp_query = NULL;
+                $wp_query = $temp_query;
 
 
 
@@ -103,19 +140,140 @@ get_header();
                     * If you want to override this in a child theme, then include a file
                     * called content-___.php (where ___ is the Post Type name) and that will be used instead.
                     */
-                    get_template_part( 'template-parts/content', get_post_type() );
+//                    get_template_part( 'template-parts/content', get_post_type() );
 
-                endwhile;
+//                endwhile;
 
-                the_posts_navigation();
+//               the_posts_navigation();
 
-            else :
+//            else :
 
-                get_template_part( 'template-parts/content', 'none' );
+//                get_template_part( 'template-parts/content', 'none' );
 
             endif;
             ?>
 
+  </div>          
+  <div class="card">
+
+<div class="card-header" id="headingTwo"><h3 class="mb-0"><button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Opere</button></h3></div>
+    <?php
+        /* Start the Loop */
+        $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+        $q = new WP_Query([
+            'post_type' => 'opere',
+            'posts_per_page' => get_option('posts_per_page'),
+             get_query_var( 'taxonomy' ) => get_query_var( 'term' ),
+            'paged' => $paged
+        ]);
+        $temp_query = $wp_query;
+        $wp_query = null;
+        $wp_query = $q;
+        
+        if ( $q->have_posts() ) :
+            echo '<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body"><ul class="list-group">';
+            while ( $q->have_posts() ) : $q->the_post(); ?>
+        
+        <li class="list-group-item list-group-item-action"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+
+        
+                <?php    endwhile;
+            echo '</ul></div></div>
+            </div>';
+
+        endif;
+
+//                echo '</div>';
+        // Reset postdata
+        wp_reset_postdata();
+        
+        // pagination goes here..
+        
+        // Reset main query object
+        $wp_query = NULL;
+        $wp_query = $temp_query;
+
+
+
+            /*
+            * Include the Post-Type-specific template for the content.
+            * If you want to override this in a child theme, then include a file
+            * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+            */
+//                    get_template_part( 'template-parts/content', get_post_type() );
+
+//                endwhile;
+
+//               the_posts_navigation();
+
+//            else :
+
+//                get_template_part( 'template-parts/content', 'none' );
+
+//    endif;
+    ?>
+  <div class="card">
+
+<div class="card-header" id="headingTwo"><h3 class="mb-0"><button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Generi</button></h3></div>
+    <?php
+        /* Start the Loop */
+        $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+        $q = new WP_Query([
+            'post_type' => 'generi',
+            'posts_per_page' => get_option('posts_per_page'),
+             get_query_var( 'taxonomy' ) => get_query_var( 'term' ),
+            'paged' => $paged
+        ]);
+        $temp_query = $wp_query;
+        $wp_query = null;
+        $wp_query = $q;
+        
+        if ( $q->have_posts() ) :
+            echo '<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body"><ul class="list-group">';
+            while ( $q->have_posts() ) : $q->the_post(); ?>
+        
+        <li class="list-group-item list-group-item-action"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+
+        
+                <?php    endwhile;
+            echo '</ul></div></div>
+            </div>';
+
+        endif;
+
+//                echo '</div>';
+        // Reset postdata
+        wp_reset_postdata();
+        
+        // pagination goes here..
+        
+        // Reset main query object
+        $wp_query = NULL;
+        $wp_query = $temp_query;
+
+
+
+            /*
+            * Include the Post-Type-specific template for the content.
+            * If you want to override this in a child theme, then include a file
+            * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+            */
+//                    get_template_part( 'template-parts/content', get_post_type() );
+
+//                endwhile;
+
+//               the_posts_navigation();
+
+//            else :
+
+//                get_template_part( 'template-parts/content', 'none' );
+
+//    endif;
+    ?>
+</div>          
+</section>
         </main><!-- #main -->
 
 <?php

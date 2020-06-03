@@ -8,7 +8,7 @@ function the_breadcrumb() {
     $frontpage_id   = get_option('page_on_front');
 // NON MOSTRA LE BREADCRUMBS IN HOME PAGE
 if ( !is_front_page() ) {
-    echo '<nav aria-label="breadcrumb">';
+    echo '<nav class="bg-white" aria-label="breadcrumb">';
     echo '<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">';
     echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="';
     echo get_option('home');
@@ -30,14 +30,14 @@ if ( !is_front_page() ) {
     } // MOSTRA IL LINK ALLA HOME BLOG IN OGNI POST 
     elseif ( is_single() && !is_attachment() && !is_custom_post_type() ) { // FUNZIONA
         /** Cancellare la parte da echo in poi se non si vuole la blog base o modificare l'url della stessa */
-        echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/blog">Blog</a></li><li class="breadcrumb-item active">';the_title();'</li>';
+        echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/bacheca">Bacheca</a></li><li class="breadcrumb-item active">';the_title();'</li>';
     } // MOSTRA IL LINK ALLA HOME BLOG E AL POST PARENT
     elseif ( is_attachment() ) { // FUNZIONA
         $parent = get_post($post->post_parent);
         $permalink = get_permalink( $current_attachment->post_parent );
         $parent_title = get_post( $current_attachment->post_parent )->post_title;
         /** Cancellare la parte da echo in poi se non si vuole la blog base o modificare l'url della stessa */
-        echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/blog">Blog</a></li><li class="breadcrumb-item"><a href="' . get_permalink($parent) . '">' . $parent->post_title . '</a></li>';
+        echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/bacheca">Bacheca</a></li><li class="breadcrumb-item"><a href="' . get_permalink($parent) . '">' . $parent->post_title . '</a></li>';
         echo '<li class="breadcrumb-item active">';the_title();'</li>';
     } // MOSTRA LE PAGINE PARENT SE CI SONO ALTRIMENTI SOLO LA PAGINA CORRENTE 
     elseif ( is_page()){ // FUNZIONA
@@ -61,7 +61,7 @@ if ( !is_front_page() ) {
         }
     } // MOSTRA LE CATEGORIE PARENT SE CI SONO ALTRIMENTI SOLO LA CATEGORIA CORRENTE
      elseif (is_category()) {
-        if ( $term_ids = get_ancestors( get_queried_object_id(), 'category') ) { //FUNZIONA [Da testare con tax]
+        if ( $term_ids = get_ancestors( get_queried_object_id(), 'category', 'taxonomy') ) { //FUNZIONA [Da testare con tax]
             $crumbs = [];
             foreach ( $term_ids as $term_id ) {
                 $term = get_term( $term_id, 'category' );
@@ -100,9 +100,35 @@ if ( !is_front_page() ) {
     } if ( is_singular( 'version' ) ) {
 //    elseif ( is_single() && !is_custom_post_type( 'version' ) ) {
         echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/versioni">Versioni</a></li><li class="breadcrumb-item active">';the_title();'</li>';
-    }elseif ( is_singular( 'autori' ) )  {
+    } elseif ( is_singular( 'autori' ) )  {
         echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/autori">Autori</a></li><li class="breadcrumb-item active">';the_title();'</li>';
-    }// MANCANO CPT E TAX
+    } elseif ( is_singular( 'opere' ) )  {
+        echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/opere">Opere</a></li><li class="breadcrumb-item active">';the_title();'</li>';
+    } elseif ( is_tax('letterature' ) )  {// MANCANO CPT E TAX
+        $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+
+        // Create a list of all the term's parents
+        $parent = $term->parent;
+        while ($parent):
+        $parents[] = $parent;
+        $new_parent = get_term_by( 'id', $parent, get_query_var( 'taxonomy' ));
+        $parent = $new_parent->parent;
+        endwhile;
+        if(!empty($parents)):
+        $parents = array_reverse($parents);
+        
+        // For each parent, create a breadcrumb item
+        foreach ($parents as $parent):
+        $item = get_term_by( 'id', $parent, get_query_var( 'taxonomy' ));
+        $url = get_bloginfo('url').'/'.$item->taxonomy.'/'.$item->slug;
+        echo '<li class="breadcrumb-item"><a href="'.$url.'">'.$item->name.'</a></li>';
+        endforeach;
+        endif;
+        
+        // Display the current term in the breadcrumb
+        echo '<li class="breadcrumb-item"><a href="'.get_site_url().'/letterature">Letterature</a></li><li class="breadcrumb-item active">'.$term->name.'</li>';
+       
+    }
 }
 
 echo '</ol>';
