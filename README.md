@@ -1,11 +1,13 @@
-Incubation
+Digital Library
 
 Contributori: Alessandro Scali
 
-Wordpress Starter Theme
+Wordpress Theme
+
+Coming
 
 Indice
 
 1. Descrizione 
 2. Installazione
-3. 
+3. Plugin
