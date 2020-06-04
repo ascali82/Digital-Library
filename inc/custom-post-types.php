@@ -212,7 +212,7 @@ function generi_cpt() {
 		'label'                 => __( 'Post Type', '_digital_library' ),
 		'description'           => __( 'Post Type Description', '_digital_library' ),
 		'labels'                => $labels,
-		'supports'              => array( 'custom-fields' ),
+		'supports'              => array( 'custom-fields', 'title', 'editor' ),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
@@ -239,7 +239,7 @@ add_action( 'init', 'generi_cpt', 0 );
 function tipogeneri_tax() {
 
 	$labels = array(
-		'name'                       => _x( 'Taxonomies', 'Taxonomy General Name', '_digital_library' ),
+		'name'                       => _x( 'Tipologie genere', 'Taxonomy General Name', '_digital_library' ),
 		'singular_name'              => _x( 'Tipologia genere', 'Taxonomy Singular Name', '_digital_library' ),
 		'menu_name'                  => __( 'Tipo genere', '_digital_library' ),
 		'all_items'                  => __( 'All Items', '_digital_library' ),

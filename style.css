@@ -5,7 +5,7 @@ GitHub Theme URI: https://github.com/ascali82/digital-library
 Author: Alessandro Scali
 Author URI: https://github.com/ascali82/
 Description: 
-Version: 2.6
+Version: 2.7
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: _digital_library
@@ -618,8 +618,22 @@ object {
 
   .footer {
 
-	width: 100%;
-    line-height: 60px; /* Vertically center the text there */
+/* 	width: 100%;
 	background-color: #f5f5f5;
+	line-height: 60px; Vertically center the text there */
   }
+
  
+
+  html,
+body {
+  height: 100%;
+}
+
+#page {
+  flex: 1 0 auto;
+}
+
+#colophon {
+  flex-shrink: none;
+}

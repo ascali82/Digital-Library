@@ -22,9 +22,10 @@
         <?php wp_head(); ?>
     </head>
 
-    <body <?php body_class(); ?> itemscope="" itemtype="http://schema.org/WebPage">
+    <body <?php body_class('d-flex flex-column'); ?> itemscope="" itemtype="http://schema.org/WebPage">
     <?php wp_body_open(); ?>
-    <div id="page" class="site container">
+    <div id="page" class="site">
+        <div class="container">
         <a class="skip-link screen-reader-text sr-only sr-only-focusable" href="#primary"><?php esc_html_e( 'Passa al contenuto', '_digital_library' ); ?></a>
 
         <header id="masthead" class="site-header row">

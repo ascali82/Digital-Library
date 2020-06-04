@@ -30,40 +30,35 @@ get_header();
                 <div class="entry-content">        
                 <?php
             the_content();
-  $query = new WP_Query( array( 'post_type' => 'generi', 'posts_per_page' => -1  ) );
+ ?>
+ <form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="filter">
+	<?php
+		if( $terms = get_terms( array( 'taxonomy' => 'letterature', 'orderby' => 'name' ) ) ) : 
  
-    $posts = $query->posts;
-                   
-echo '<table class="table-sm table-borderless"
-  data-toggle="table"
-  data-search="true"
-  data-show-search-button="true"
-  data-pagination="true">
-    <thead class="thead-light">
-    <tr>
-    <th data-sortable="true" data-field="Genere" data-halign="center" data-align="left">Autore</th>
-    <th data-sortable="true" data-field="Tipologia" data-halign="center" data-align="left">Tipologia</th>
-    <th data-sortable="true" data-field="Letteratura" data-halign="center" data-align="left">Letteratura</th>
-    </tr>
-  </thead>
-  <tbody>';
-// impostare loop per parent letteratura e per parent tipogeneri_tax
-    foreach ($posts as $post) {
-echo '<tr id="tr-id-'. get_the_ID() .'" class="tr-class-'. get_the_ID() .'" data-title="bootstrap table">';
-echo  the_title( '<td id="td-id-'. get_the_ID() . '" class="td-class-'. get_the_ID() .'" data-title="bootstrap table"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></td>' ); 
-$args = array('orderby' => 'term_order', 'order' => 'ASC', 'fields' => 'all');
-$terms = wp_get_object_terms( $post->ID, 'letterature', $args );
-$walk = new Walker_Quickstart();
-echo $walk->walk($terms, 0);
-echo '</tr>';
-    }
-
-echo '</tbody> </table>';    
-
-
-wp_reset_postdata();
+			echo '<select name="categoryfilter"><option value="">Select category...</option>';
+			foreach ( $terms as $term ) :
+				echo '<option value="' . $term->term_id . '">' . $term->name . '</option>'; // ID of the category as the value of an option
+			endforeach;
+			echo '</select>';
+		endif;
+	?>
+	<?php
+		if( $terms = get_terms( array( 'taxonomy' => 'tipogeneri', 'orderby' => 'name', 'parent' => 0 ) ) )  : 
  
-?>
+			echo '<select name="categoryfilter"><option value="">Select category...</option>';
+			foreach ( $terms as $term ) :
+				echo '<option value="' . $term->term_id . '">' . $term->name . '</option>'; // ID of the category as the value of an option
+			endforeach;
+			echo '</select>';
+		endif;
+	?>
+	<button>Apply filter</button>
+	<input type="hidden" name="action" value="myfilter">
+</form>
+
+  <div id="response">         
+ 
+</div> 
                 </div><!-- .entry-content -->
 
 <?php if ( get_edit_post_link() ) : ?>
