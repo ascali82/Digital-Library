@@ -13,12 +13,14 @@
 get_header();
 ?>
 
-        <main id="primary" class="site-main col-12 col-md-8">   
+        <main id="primary" class="site-main col-12 col-md-8">
+
         <?php 
         if (function_exists('the_breadcrumb')) {
             the_breadcrumb();
         }
          ?> 
+
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <header class="entry-header">
                     <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>

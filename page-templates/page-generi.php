@@ -31,34 +31,39 @@ get_header();
                 <?php
             the_content();
  ?>
- <form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="filter">
-	<?php
-		if( $terms = get_terms( array( 'taxonomy' => 'letterature', 'orderby' => 'name' ) ) ) : 
  
-			echo '<select name="categoryfilter"><option value="">Select category...</option>';
-			foreach ( $terms as $term ) :
-				echo '<option value="' . $term->term_id . '">' . $term->name . '</option>'; // ID of the category as the value of an option
-			endforeach;
-			echo '</select>';
-		endif;
-	?>
-	<?php
-		if( $terms = get_terms( array( 'taxonomy' => 'tipogeneri', 'orderby' => 'name', 'parent' => 0 ) ) )  : 
- 
-			echo '<select name="categoryfilter"><option value="">Select category...</option>';
-			foreach ( $terms as $term ) :
-				echo '<option value="' . $term->term_id . '">' . $term->name . '</option>'; // ID of the category as the value of an option
-			endforeach;
-			echo '</select>';
-		endif;
-	?>
-	<button>Apply filter</button>
-	<input type="hidden" name="action" value="myfilter">
-</form>
 
-  <div id="response">         
+<?php 
+// WP_Query arguments
+$args = array (
+	'post_type'              => array( 'generi' ),
+	'post_status'            => array( 'publish' ),
+	'nopaging'               => true,
+	'order'                  => 'ASC',
+	'orderby'                => 'menu_order',
+);
+
+// The Query
+$services = new WP_Query( $args );
+
+// The Loop
+if ( $services->have_posts() ) :  ?>
+    <ul>
+    <?php	while ( $services->have_posts() ) :
+		$services->the_post();?>
+		<li><?php printf( '%1$s - %2$s', get_the_title(), get_the_content() );  ?></li>
+        <?php
+
+    endwhile;
+    wp_reset_postdata();
+  ?>
+</ul>
+<?php
+else :
+esc_html_e( 'No testimonials in the diving taxonomy!', 'text-domain' );
+endif;
+?>
  
-</div> 
                 </div><!-- .entry-content -->
 
 <?php if ( get_edit_post_link() ) : ?>

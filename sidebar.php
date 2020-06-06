@@ -23,5 +23,4 @@ get_template_part( 'template-parts/sidebar/sidebar', 'autori', get_post_type() )
 
 }?>
 
-
 </aside><!-- #secondary -->

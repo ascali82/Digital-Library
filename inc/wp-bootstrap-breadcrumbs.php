@@ -11,7 +11,7 @@ if ( !is_front_page() ) {
     echo '<nav class="bg-white" aria-label="breadcrumb">';
     echo '<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">';
     echo '<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="';
-    echo get_option('home');
+    echo home_url();
     echo '">';
     echo '<span itemprop="name">Home</span>';
     echo '</a><meta itemprop="position" content="1" /></li>';
@@ -120,7 +120,7 @@ if ( !is_front_page() ) {
         // For each parent, create a breadcrumb item
         foreach ($parents as $parent):
         $item = get_term_by( 'id', $parent, get_query_var( 'taxonomy' ));
-        $url = get_bloginfo('url').'/'.$item->taxonomy.'/'.$item->slug;
+        $url = home_url().'/'.$item->taxonomy.'/'.$item->slug;
         echo '<li class="breadcrumb-item"><a href="'.$url.'">'.$item->name.'</a></li>';
         endforeach;
         endif;

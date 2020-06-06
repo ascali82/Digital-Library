@@ -114,7 +114,7 @@
                                 <?php endif; ?>                                
                             <?php } ?>  
                             <?php if( get_field('identifier') ): ?>
-                                <dt class="col col-lg-4">Controllo di autorità</dt>
+                                <dt class="col col-lg-4">Controllo di autorita&#768;</dt>
                                 <dd class="col col-lg-4"><a href="<?php the_field('identifier'); ?>"><link itemprop="identifier" href="<?php the_field('identifier'); ?>" />VIAF</a></dd>
                                 <div class="w-100"></div>
                             <?php endif; ?>     
@@ -159,7 +159,7 @@
                                 <div class="w-100"></div>
                             <?php endif; ?>
                             <?php if( get_field('nationality') ): ?>
-                                <dt class="col col-lg-4">Nazionalità</dt>
+                                <dt class="col col-lg-4">Nazionalita&#768;</dt>
                                 <dd class="col col-lg-4"><span itemprop="nationality"><?php the_field('nationality'); ?></span></dd>
                                 <div class="w-100"></div>
                             <?php endif; ?>

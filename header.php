@@ -25,11 +25,11 @@
     <body <?php body_class('d-flex flex-column'); ?> itemscope="" itemtype="http://schema.org/WebPage">
     <?php wp_body_open(); ?>
     <div id="page" class="site">
-        <div class="container">
+
         <a class="skip-link screen-reader-text sr-only sr-only-focusable" href="#primary"><?php esc_html_e( 'Passa al contenuto', '_digital_library' ); ?></a>
 
-        <header id="masthead" class="site-header row">
-
+        <header id="masthead" class="site-header">
+        <div class="container">
             <div class="site-branding">
                 <?php
                 the_custom_logo();
@@ -48,9 +48,9 @@
                     <p class="site-description" itemprop="description"><?php echo $_digital_library_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
                 <?php endif; ?>
             </div><!-- .site-branding -->
-
+            </div>
             <nav id="site-navigation" class="main-navigation navbar navbar-expand-md navbar-light bg-light">
-                
+            <div class="container">                
                     <!-- Brand and toggle get grouped for better mobile display -->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#primary-menu" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle navigation">
 					        <span class="navbar-toggler-icon"></span>
@@ -69,8 +69,9 @@
                             'walker'            => new WP_Bootstrap_Navwalker(),
                         ) );
                         ?>
-                    
+                 </div>  
                 </nav><!-- #site-navigation .main-navigation -->
 
 	    </header><!-- #masthead --> 
-        <div id="wrapper" class="row">
+        <div id="wrapper" class="container">
+            <div class="row">

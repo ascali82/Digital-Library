@@ -88,9 +88,10 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
 
     // Registra gli stili del tema
     function _digital_library_enqueue_styles() {
+
         wp_enqueue_style( '_digital_library-style', get_stylesheet_uri(), array(), _digital_library_VERSION );
         // CORE CSS
-        wp_enqueue_style( 'main', get_stylesheet_uri() . '/assets/css/main.css');        
+        wp_enqueue_style( 'main', get_template_directory_uri() . '/assets/css/main.css' ); 
         // Bootstrap CSS
         wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' );
         // FA
@@ -103,15 +104,16 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
     // Registra gli script del tema
     function _digital_library_enqueue_scripts() {
         wp_deregister_script('jquery');
-        wp_enqueue_script( 'jquery','https://code.jquery.com/jquery-3.4.1.slim.min.js');
+        wp_register_script( 'jquery','https://code.jquery.com/jquery-3.4.1.slim.min.js', false, null, true);
+        wp_enqueue_script('jquery');
 
-        wp_enqueue_script( 'popper','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' );
+        wp_enqueue_script( 'popper','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', false, null, true );
 
-        wp_enqueue_script( 'bootstrapjs','https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' );
+        wp_enqueue_script( 'bootstrapjs','https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', false, null, true );
 
-        wp_enqueue_script( 'bootstrap_table_js','https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js' );
+        wp_enqueue_script( 'bootstrap_table_js','https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js', false, null, true );
 
-        wp_enqueue_script( 'filter', get_template_directory_uri() . '/assets/js/filter.js', array(), _digital_library_VERSION, true  );
+        wp_enqueue_script( 'filter', get_template_directory_uri() . '/assets/js/filter.js', array('jquery'), '', true  );
 
         wp_enqueue_script( '_digital_library-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _digital_library_VERSION, true );
 
@@ -288,50 +290,3 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
 
 
 
-// FILTER --testing
-
- 
-add_action('wp_ajax_myfilter', 'misha_filter_function'); // wp_ajax_{ACTION HERE} 
-add_action('wp_ajax_nopriv_myfilter', 'misha_filter_function');
- 
-function misha_filter_function(){
-	$args = array(
-		'orderby' => 'date', // we will sort posts by date
-		'order'	=> $_POST['date'] // ASC or DESC
-	);
- 
-	// for taxonomies / categories
-	if( isset( $_POST['categoryfilter'] ) )
-		$args['tax_query'] = array(
-			array(
-				'taxonomy' => 'category',
-				'field' => 'id',
-				'terms' => $_POST['categoryfilter']
-			)
-		);
- 
-
- 
- 
-
-	// if you want to use multiple checkboxed, just duplicate the above 5 lines for each checkbox
-  $args = array(  
-    'post_type' => 'generi',
-    'post_status' => 'publish',
-    'posts_per_page' => -1, 
-    'orderby' => 'title', 
-    'order' => 'ASC', 
-);
-	$query = new WP_Query( $args );
- 
-	if( $query->have_posts() ) :
-		while( $query->have_posts() ): $query->the_post();
-			echo '<h2>' . $query->post->post_title . '</h2>';
-		endwhile;
-		wp_reset_postdata();
-	else :
-		echo 'No posts found';
-	endif;
- 
-	die();
-}

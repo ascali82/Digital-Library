@@ -12,7 +12,7 @@
 get_header();
 ?>
 
-        <main id="primary" class="site-main">   
+        <main id="primary" class="site-main col-12">   
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
