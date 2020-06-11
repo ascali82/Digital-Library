@@ -16,7 +16,7 @@
         </div><!-- #page -->
         <footer id="colophon" class="site-footer footer pt-4">
             <div class="footer-cont container">
-                <div class="row">
+                <div class="row text-left">
                     
                         <?php wp_nav_menu( array(
                         'theme_location'  => 'secondary',
@@ -26,11 +26,15 @@
                         'menu_id'         => 'footer_nav',
                         'items_wrap'      => '<ul id="%1$s" class="%2$s list-unstyled">%3$s</ul>'  ) ); ?>
                     
-                    <div class="col-12 col-md-6">
-
-                    </div>
+                    <?php wp_nav_menu( array(
+                        'theme_location'  => 'secondary',
+                        'menu'            => 'Footer Menu', 
+                        'container'       => 'div', 
+                        'container_class' => 'col-12 col-md-6', 
+                        'menu_id'         => 'footer_nav',
+                        'items_wrap'      => '<ul id="%1$s" class="%2$s list-unstyled">%3$s</ul>'  ) ); ?>
                 </div>
-                <div class="container text-center">
+                <div class="container text-center border-top">
                     <div class="site-info text-muted p-0">
                     <small>
                             <?php

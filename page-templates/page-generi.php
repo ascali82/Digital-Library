@@ -31,7 +31,28 @@ get_header();
                 <?php
             the_content();
  ?>
- 
+			<form id="misha_filters" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST">
+				<label for="misha_posts_per_page">Per page</label>
+				<select name="misha_posts_per_page" id="misha_posts_per_page">
+					<option><?php echo get_option( 'posts_per_page' ) ?></option><!-- default value from Settings->Reading -->
+					<option>5</option>
+					<option>10</option>
+					<option value="-1">All</option>
+				</select>
+				
+				<label for="misha_order_by">Order</label>
+				<select name="misha_order_by" id="misha_order_by">
+					<option value="date-DESC">Date &darr;</option><!-- I will explode these values by "-" symbol later -->
+					<option value="date-ASC">Date &uarr;</option>
+					<option value="comment_count-DESC">Comments &darr;</option>
+					<option value="comment_count-ASC">Comments &uarr;</option>
+				</select>
+				
+				<!-- required hidden field for admin-ajax.php -->
+				<input type="hidden" name="action" value="mishafilter" />
+				
+				<button>Apply Filters</button>
+			</form>
 
 <?php 
 // WP_Query arguments
@@ -47,23 +68,30 @@ $args = array (
 $services = new WP_Query( $args );
 
 // The Loop
-if ( $services->have_posts() ) :  ?>
-    <ul>
-    <?php	while ( $services->have_posts() ) :
+if ( $services->have_posts() ) :  				?>
+    <div id="misha_posts_wrap">
+        <?php	while ( $services->have_posts() ) :
 		$services->the_post();?>
-		<li><?php printf( '%1$s - %2$s', get_the_title(), get_the_content() );  ?></li>
+		<?php printf( '%1$s - %2$s', get_the_title(), get_the_content() );  ?>
         <?php
 
     endwhile;
-    wp_reset_postdata();
-  ?>
-</ul>
-<?php
-else :
-esc_html_e( 'No testimonials in the diving taxonomy!', 'text-domain' );
+
+  ?></div><?php
+
+  global $wp_query; // you can remove this line if everything works for you
+
+  // don't display the button if there are not enough posts
+  if (  $wp_query->max_num_pages > 1 ) :
+      echo '<div id="misha_loadmore">More posts</div>'; // you can use <a> as well
+  endif;
+
+else:
+
+  get_template_part( 'template-parts/post/content', 'none' );
+
 endif;
 ?>
- 
                 </div><!-- .entry-content -->
 
 <?php if ( get_edit_post_link() ) : ?>

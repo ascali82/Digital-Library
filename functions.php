@@ -113,8 +113,6 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
 
         wp_enqueue_script( 'bootstrap_table_js','https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js', false, null, true );
 
-        wp_enqueue_script( 'filter', get_template_directory_uri() . '/assets/js/filter.js', array('jquery'), '', true  );
-
         wp_enqueue_script( '_digital_library-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _digital_library_VERSION, true );
 
         wp_enqueue_script( '_digital_library-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), _digital_library_VERSION, true );
@@ -166,127 +164,6 @@ if ( ! function_exists( '_digital_library_setup' ) ) :
     // Registra la classe TGM-Plugin-Activation
     require_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
     require_once get_template_directory() . '/inc/plugin-call.php';
-    
 
-
-    // Include OpenGraph per i single post
-    function opengraph_for_posts() {     
-        if ( is_singular() ) {
-            global $post;         
-            setup_postdata( $post );         
-            $og_type = '<meta property="og:type" content="article" />' . "\n";        
-            $og_title = '<meta property="og:title" content="' . esc_attr( get_the_title() ) . '" />' . "\n";         
-            $og_url = '<meta property="og:url" content="' . get_permalink() . '" />' . "\n";   
-            if ( $og_description = $post->post_excerpt ) {     
-                $og_description = '<meta property="og:description" content="' . esc_attr( get_the_excerpt() ) . '" />' . "\n";         
-            } else {
-                $og_description = '<meta property="og:description" content="' . esc_attr( get_bloginfo('description') ) . '" />' . "\n";
-            }
-            if ( has_post_thumbnail() ) {             
-                 $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );             
-                 $og_image = '<meta property="og:image" content="' . $imgsrc[0] . '" />' . "\n";         
-            }         
-            
-            echo $og_type . $og_title . $og_url . $og_description . $og_image;     
-        } 
-    } 
-    
-    add_action( 'wp_head', 'opengraph_for_posts' );
-
-    // Controllo aggiuntivo identificativo CPT
-    /**
-     * Check if a post is a custom post type.
-     * @param  mixed $post Post object or ID
-     * @return boolean
-     */
-    function is_custom_post_type( $post = NULL )
-    {
-        $all_custom_post_types = get_post_types( array ( '_builtin' => FALSE ) );
-
-        // there are no custom post types
-        if ( empty ( $all_custom_post_types ) )
-            return FALSE;
-
-        $custom_types      = array_keys( $all_custom_post_types );
-        $current_post_type = get_post_type( $post );
-
-        // could not detect current type
-        if ( ! $current_post_type )
-            return FALSE;
-
-        return in_array( $current_post_type, $custom_types );
-    }
-
-
-
-        // Include il supporto per la gerarchia dei termini delle tassonomie
-        require_once get_template_directory() . '/inc/class-term-hyerarchical.php';
-
-        // Disabilita Gutenberg nei CPT autori e opere
-        add_filter('use_block_editor_for_post_type', 'prefix_disable_gutenberg', 10, 2);
-        function prefix_disable_gutenberg($current_status, $post_type)
-        {
-            // Indicazione Post Type
-            if ($post_type === 'autori' || 'opere') return false;
-            return $current_status;
-        }
-
-        // Generazione titolo e slug per il cpt 'autori'
-        add_action('admin_head', 'hide_wp_title_input');
-        function hide_wp_title_input() {
-          $screen = get_current_screen();
-          if ($screen->id != 'autori' ) {
-            return;
-          }
-          ?>
-            <style type="text/css">
-              #post-body-content {
-                display: none;
-              }
-            </style>
-          <?php 
-        }
-
-        function save_post_type_post($post_id) {
-          $post_type = get_post_type($post_id);
-          if ($post_type != 'autori') {
-            return;
-          }
-          if( has_term( 'letteratura-latina', 'letterature' ) ) {
-
-            $praenomen = get_field( 'givenname', $post_id );
-            $nomen = get_field( 'familyname', $post_id );
-            $cognomen = get_field( 'additionalname', $post_id );
-            $supernomina = get_field( 'alternatename', $post_id );
-
-            $post_title = $praenomen .' '. $nomen .' '. $cognomen .' '. $supernomina;
-            $post_name = sanitize_title($post_title);
-            $post = array(
-              'ID' => $post_id,
-              'post_name' => $post_name,
-              'post_title' => $post_title
-            );
-            wp_update_post($post);
-          } 
-          elseif ( has_term( 'letteratura-italiana', 'letterature' ) ) {
-
-            $nome = get_field( 'givenname', $post_id );
-            $secondonome = get_field( 'additionalname', $post_id );
-            $cognome = get_field( 'familyname', $post_id );
-            $alias = get_field( 'alternatename', $post_id );
-
-            $post_title = $nome .' '. $secondonome .' '. $cognome;
-            $post_name = sanitize_title($post_title);
-            $post = array(
-              'ID' => $post_id,
-              'post_name' => $post_name,
-              'post_title' => $post_title
-            );
-            wp_update_post($post);
-          } 
-
-        }
-        add_action('acf/save_post', 'save_post_type_post', 20); // fires after ACF
-
-
-
+    // Include il supporto per la gerarchia dei termini delle tassonomie
+    require_once get_template_directory() . '/inc/class-term-hyerarchical.php';

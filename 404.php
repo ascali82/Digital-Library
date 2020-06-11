@@ -10,18 +10,21 @@
 get_header();
 ?>
 
-        <main id="primary" class="site-main">
+    <main id="primary" class="site-main col-12">
         <?php 
         if (function_exists('the_breadcrumb')) {
             the_breadcrumb();
         }
          ?> 
-            <section class="error-404 not-found">
+            <section class="error-404 not-found container error-container">
+            <div class="row  d-flex align-items-center justify-content-center">
+		        <div class="col-md-12 text-center">
                 <header class="page-header">
-                    <h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', '_digital_library' ); ?></h1>
+                    <h1 class="page-title big-text"><?php esc_html_e( 'Oops! Non riusciamo a trovare la pagina che stavi cercando', '_digital_library' ); ?></h1>
+                    <h2 class="small-text">404 - PAGE NOT FOUND</h2>
                 </header><!-- .page-header -->
-
-                <div class="page-content">
+            </div>
+                <div class="page-content col-md-6  text-center">
                     <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', '_digital_library' ); ?></p>
 
                         <?php

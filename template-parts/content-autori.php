@@ -31,30 +31,34 @@
                 <?php _digital_library_post_thumbnail(); ?>
 
                 <div class="entry-content">
-                <?php  // echo get_the_term_list( $post->ID, 'letterature', '<ul class="styles"><li>', ',</li><li>', '</li></ul>' );
-                            ?>
-                        <?php if( get_field('disambiguatingDescription') ): ?>
-                            <p class="lead"><span itemprop="disambiguatingDescription"><?php the_field('disambiguatingDescription'); ?></span></p>
-                        <?php endif; ?>
-                        <?php 
-                        $image = get_field('image');
-                        if( $image ):
-                        
-                            // Image variables.
-                            $url = $image['url'];
-                            $title = $image['title'];
-                            $alt = $image['alt'];
-                            $caption = $image['caption'];
-                        
-                            // Thumbnail size attributes.
-                            $size = 'thumbnail';
-                            $thumb = $image['sizes'][ $size ];
-                            $width = $image['sizes'][ $size . '-width' ];
-                            $height = $image['sizes'][ $size . '-height' ];
-                        
-                            // Begin caption wrap.
-                            if( $caption ): ?>
-                                <div class="wp-caption">
+                    <div class="row">
+                        <div class="col-12 col-md-8 align-items-sm-center">
+                            <?php  // echo get_the_term_list( $post->ID, 'letterature', '<ul class="styles"><li>', ',</li><li>', '</li></ul>' );
+                                        ?>
+                                    <?php if( get_field('disambiguatingDescription') ): ?>
+                                        <p class="lead"><span itemprop="disambiguatingDescription"><?php the_field('disambiguatingDescription'); ?></span></p>
+                                    <?php endif; ?>
+                                    </div>
+                        <div class="wp-caption col-12 col-md-4">                                    
+                                    <?php 
+                                    $image = get_field('image');
+                                    if( $image ):
+                                    
+                                        // Image variables.
+                                        $url = $image['url'];
+                                        $title = $image['title'];
+                                        $alt = $image['alt'];
+                                        $caption = $image['caption'];
+                                    
+                                        // Thumbnail size attributes.
+                                        $size = 'thumbnail';
+                                        $thumb = $image['sizes'][ $size ];
+                                        $width = $image['sizes'][ $size . '-width' ];
+                                        $height = $image['sizes'][ $size . '-height' ];
+                                    
+                                        // Begin caption wrap.
+                                        if( $caption ): ?>
+
                             <?php endif; ?>
                         
                             <a href="<?php echo esc_url($url); ?>" title="<?php echo esc_attr($title); ?>">
@@ -67,7 +71,21 @@
                                 <p class="wp-caption-text"><?php echo esc_html($caption); ?></p>
                                 </div>
                             <?php endif; ?>
-                        <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+
+                    </div>
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Scheda Autore
+                </button>
+            </h2>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">                        
                         <dl class="row">
                             <?php if ( has_term( 'letteratura-italiana', 'letterature' ) ) { ?>
                                 <?php if( get_field('givenname') ): ?>
@@ -163,8 +181,55 @@
                                 <dd class="col col-lg-4"><span itemprop="nationality"><?php the_field('nationality'); ?></span></dd>
                                 <div class="w-100"></div>
                             <?php endif; ?>
-
                         </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Biografia
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div> 
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Stile
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Opere
+        </button>
+        </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>          
+</div>
+
+                       
                 </div><!-- .entry-content -->
 
                 <footer class="entry-footer">
